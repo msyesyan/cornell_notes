@@ -12,11 +12,23 @@ module.exports = {
   module: {
     rules: [
       {
-        test: '/.html$/',
+        test: /\.html$/,
+        exclude: /node_modules/,
         loader: 'html-loader'
       },
       {
-        test: /.js$/,
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: "style-loader"
+        }, {
+          loader: "css-loader"
+        }, {
+          loader: "sass-loader"
+        }]
+      },
+      {
+        test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
