@@ -1,7 +1,15 @@
-const component = () => {
-  let element = document.createElement('div');
-  element.innerHTML = 'hello world';
-  return element;
+import React from 'react';
+import { render } from 'react-dom';
+
+const App = () => {
+  return (
+    <h1>
+      Hello world
+    </h1>
+  )
 }
 
-document.body.appendChild(component());
+render(
+  <App/>,
+  document.getElementById('app')
+);
