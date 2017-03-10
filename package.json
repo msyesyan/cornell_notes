@@ -1,0 +1,9 @@
+{
+  "name": "cornell_notes",
+  "version": "1.0.0",
+  "description": "record, reduce, recite, reflect, review",
+  "main": "index.js",
+  "repository": "git@github.com:msyesyan/cornell_notes.git",
+  "author": "msyesyan@gmail.com",
+  "license": "MIT"
+}
