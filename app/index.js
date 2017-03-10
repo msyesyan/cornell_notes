@@ -1,22 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-const name = 'worlds';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
-const App = (props) => {
-  return (
-    <h1>Hello, {props.name}</h1>
-  )
-}
+import App from './containers/App.js';
 
-function renderComponent(RootComponent) {
-  render(
-    <RootComponent name={name}/>,
-    document.getElementById('app')
-  );
-}
+import './stylesheets/panel.scss';
 
 if (module.hot) {
   module.hot.accept();
-  renderComponent(App);
+  render(
+    <App />,
+    document.getElementById('app')
+  )
 }
