@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "git@github.com:msyesyan/cornell_notes.git",
   "author": "msyesyan@gmail.com",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "webpack": "^2.2.1"
+  },
 }
