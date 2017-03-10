@@ -1,15 +1,22 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-const App = () => {
+const name = 'worlds';
+
+const App = (props) => {
   return (
-    <h1>
-      Hello world
-    </h1>
+    <h1>Hello, {props.name}</h1>
   )
 }
 
-render(
-  <App/>,
-  document.getElementById('app')
-);
+function renderComponent(RootComponent) {
+  render(
+    <RootComponent name={name}/>,
+    document.getElementById('app')
+  );
+}
+
+if (module.hot) {
+  module.hot.accept();
+  renderComponent(App);
+}

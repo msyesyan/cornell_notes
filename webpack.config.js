@@ -1,18 +1,36 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
-  entry: './app/index.js',
+  context: path.resolve(__dirname, 'app'),
+  entry: './index.js',
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.join(__dirname, 'dist'),
+    publicPath: 'assets',
+    filename: 'bundle.js'
   },
   module: {
     rules: [
       {
+        test: '/.html$/',
+        loader: 'html-loader'
+      },
+      {
         test: /.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'env'],
+        },
       }
     ]
-  }
+  },
+  devtool: 'eval',
+  devServer: {
+    hot: true,
+    publicPath: '/assets'
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 }
