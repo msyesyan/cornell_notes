@@ -25,7 +25,7 @@ module.exports = {
       }
     ]
   },
-  devtool: 'eval',
+  devtool: 'source-map',
   devServer: {
     hot: true,
     publicPath: '/assets'
