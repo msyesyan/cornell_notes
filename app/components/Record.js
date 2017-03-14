@@ -1,37 +1,52 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes, Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
 
-const _handleKeyPress = ({key, target}) => {
-  if (key === 'Enter') {
-    createRecord({
-      content: target.value
-    });
+class Record extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      content: props.model.content
+    }
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-};
 
-const createRecord = (props) => {
-  const newRecord = {
-    id: 'newRecord',
-    props
+  handleChange(event) {
+    this.setState({
+      content: event.target.value
+    })
   }
-};
 
-const Record = ({model}) => {
-  return (
-    <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <TextField defaultValue={model.content}
-                 fullWidth={true}
-                 hintText='Type text and enter to add a new record'
-                 onKeyPress={_handleKeyPress}
-                 onBlur={(event, newValue) => {console.log(newValue)}} />
-    </MuiThemeProvider>
-  );
+  handleKeyPress({key, target}) {
+    if (key === 'Enter') {
+      this.props.onSave({
+        content: target.value
+      });
+      if (!this.props.model.id) {
+        this.setState({content: ''})
+      }
+    }
+  }
+
+  render() {
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <TextField
+          value={this.state.content}
+          fullWidth={true}
+          hintText='Type text and enter to add a new record'
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress} />
+      </MuiThemeProvider>
+    );
+  }
 }
 
 Record.propTypes = {
-  model: PropTypes.object.isRequired
+  model: PropTypes.object.isRequired,
+  onSave: PropTypes.func.isRequired
 }
 
 export default Record;
